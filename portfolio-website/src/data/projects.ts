@@ -29,3 +29,6 @@ export const featuredProjects: Project[] = [
     imageSrc: "/vercel.svg",
   },
 ];
+
+// For now, list all projects as the same as featured. Expand as needed.
+export const allProjects: Project[] = [...featuredProjects];
