@@ -16,7 +16,7 @@ export default function Navbar() {
             <div className="max-w-6xl mx-auto flex items-center justify-between p-4 md:p-6">
                 {/* Logo area */}
                 <div className="flex items-center gap-3">
-                    <Link href="/page0" className="flex items-center gap-3">
+                    <Link href="/" className="flex items-center gap-3">
                         <Image src={logo} alt="Stefan's logo" width={80} height={80} className="rounded-full object-cover" />
                         <span className="hidden sm:inline-block font-semibold text-lg text-white drop-shadow-sm">Stefan Spataro</span>
                     </Link>
@@ -24,28 +24,25 @@ export default function Navbar() {
 
                 {/* Desktop links */}
                 <nav className="hidden md:flex items-center gap-6">
-                    <Link href="/page0" className="text-sm font-medium text-gray-200 hover:text-[#c29a62]">
-                        Home
+                    <Link href="/about" className="text-sm font-medium text-gray-200 hover:text-[#c29a62]">
+                        about
                     </Link>
-                    <Link href="/page1" className="text-sm text-gray-200 hover:text-[#c29a62]">
-                        Page 1
+                    <Link href="/portfolio" className="text-sm text-gray-200 hover:text-[#c29a62]">
+                        portfolio
                     </Link>
-                    <Link href="/page2" className="text-sm text-gray-200 hover:text-[#c29a62]">
-                        Page 2
-                    </Link>
-                    <Link href="/page3" className="text-sm text-gray-200 hover:text-[#c29a62]">
-                        Page 3
+                    <Link href="/contact" className="text-sm text-gray-200 hover:text-[#c29a62]">
+                        contact
                     </Link>
                 </nav>
 
                 {/* Social icons + mobile menu button */}
                 <div className="flex items-center gap-4">
                     <div className="hidden sm:flex items-center gap-3">
-                        <a href="https://github.com/" target="_blank" rel="noreferrer" className="inline-flex items-center">
+                        <a href="https://github.com/Stefans217?tab=repositories" target="_blank" rel="noreferrer" className="inline-flex items-center">
                             <span className="sr-only">GitHub</span>
                             <Image src={githubIcon} alt="" width={20} height={20} />
                         </a>
-                        <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="inline-flex items-center">
+                        <a href="https://www.linkedin.com/in/stefanspataro-8ba631225/" target="_blank" rel="noreferrer" className="inline-flex items-center">
                             <span className="sr-only">LinkedIn</span>
                             <Image src={linkedinIcon} alt="" width={20} height={20} />
                         </a>
@@ -68,17 +65,17 @@ export default function Navbar() {
             {open && (
                 <div className="md:hidden border-t bg-white/60 backdrop-blur-sm">
                     <div className="max-w-6xl mx-auto p-4 flex flex-col gap-3">
-                        <Link href="/page0" className="block text-gray-700 font-medium">
-                            Home
+                        <Link href="/" className="block text-gray-700 font-medium">
+                            About Me
                         </Link>
-                        <Link href="/page1" className="block text-gray-600">
-                            Page 1
+                        <Link href="/about" className="block text-gray-600">
+                            About
                         </Link>
-                        <Link href="/page2" className="block text-gray-600">
-                            Page 2
+                        <Link href="/portfolio" className="block text-gray-600">
+                            portfolio
                         </Link>
-                        <Link href="/page3" className="block text-gray-600">
-                            Page 3
+                        <Link href="/contact" className="block text-gray-600">
+                            Contact
                         </Link>
                         <div className="flex gap-4 pt-2">
                             <a href="https://github.com/" target="_blank" rel="noreferrer" aria-label="GitHub" className="text-gray-600">

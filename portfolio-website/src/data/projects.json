@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "title": "My Cool App",
+    "description": "A modern web app built with Next.js",
+    "tech": ["Next.js", "TypeScript"],
+    "link": "https://myapp.com",
+    "image": "/images/myapp.png"
+  }
+]

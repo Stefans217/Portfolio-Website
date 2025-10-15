@@ -1,0 +1,1 @@
+// displays a single project in the projects and landing page.

@@ -1,3 +1,5 @@
+// this is the main landing page of the website
+
 export default function Page0() {
   return (
     <div>
