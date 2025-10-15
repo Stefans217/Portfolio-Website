@@ -1,0 +1,20 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Typecheck project",
+			"type": "shell",
+			"command": "npm run -s lint",
+			"group": "build"
+		},
+		{
+			"label": "Lint (Biome)",
+			"type": "shell",
+			"command": "npm run -s lint",
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		}
+	]
+}

@@ -5,7 +5,7 @@ export const featuredProjects: Project[] = [
     id: "p1",
     title: "Interactive Globe",
     description: "3D WebGL globe with real-time markers and smooth interactions.",
-    tags: ["Next.js", "Three.js", "TypeScript"],
+    tags: ["Next.js", "Three.js", "TypeScript", "hello"],
     href: "#",
     repo: "#",
     imageSrc: "/globe.svg",

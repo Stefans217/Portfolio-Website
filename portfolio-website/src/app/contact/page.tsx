@@ -1,8 +1,22 @@
-export default function Page3() {
-  return (
-    <div>
-      <h1 className="text-2xl font-bold mb-2">Page 3</h1>
-      <p>This is the first section of the site.</p>
-    </div>
-  );
+import type { Metadata } from "next";
+import ContactForm from "@/components/forms/ContactForm";
+
+export const metadata: Metadata = {
+    title: "Contact",
+    description: "Get in touch about employment opportunities, contract work, or collaborations.",
+};
+
+export default function ContactPage() {
+    return (
+        <main className="mx-auto max-w-3xl px-4 py-12 sm:py-16">
+            <header className="mb-8 text-center">
+                <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Contact me</h1>
+                <p className="mt-2 text-sm text-gray-400">Looking for a collaborator or hiring for a role? Drop a note below.</p>
+            </header>
+
+            <section className="rounded-xl border border-white/10 bg-black/30 p-6 backdrop-blur sm:p-8">
+                <ContactForm />
+            </section>
+        </main>
+    );
 }

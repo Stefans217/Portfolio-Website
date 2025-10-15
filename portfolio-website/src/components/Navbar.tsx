@@ -24,10 +24,10 @@ export default function Navbar() {
 
                 {/* Desktop links */}
                 <nav className="hidden md:flex items-center gap-6">
-                    <Link href="/about" className="text-sm font-medium text-gray-200 hover:text-[#c29a62]">
+                    <Link href="/" className="text-sm font-medium text-gray-200 hover:text-[#c29a62]">
                         Home & About
                     </Link>
-                    <Link href="/portfolio" className="text-sm text-gray-200 hover:text-[#c29a62]">
+                    <Link href="/projects" className="text-sm text-gray-200 hover:text-[#c29a62]">
                         My Projects
                     </Link>
                     <Link href="/contact" className="text-sm text-gray-200 hover:text-[#c29a62]">
@@ -64,7 +64,7 @@ export default function Navbar() {
                         <Link href="/about" className="block text-gray-600">
                             Home & About
                         </Link>
-                        <Link href="/portfolio" className="block text-gray-600">
+                        <Link href="/projects" className="block text-gray-600">
                             My Projects
                         </Link>
                         <Link href="/contact" className="block text-gray-600">
