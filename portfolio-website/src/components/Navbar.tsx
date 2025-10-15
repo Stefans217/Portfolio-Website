@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import logo from "../assets/images/Professional Logo 3.png";
+import logo from "../assets/images/Logo 7.png";
 import githubIcon from "../assets/images/github-mark-white.png";
 import linkedinIcon from "../assets/images/InBug-White.png";
 import xIcon from "../assets/images/logo-white.png";
@@ -12,7 +12,7 @@ export default function Navbar() {
     const [open, setOpen] = useState(false);
 
     return (
-        <header className="w-full bg-black backdrop-blur-sm border-b">
+        <header className="w-full bg-[#366899] backdrop-blur-sm border-b">
             <div className="max-w-6xl mx-auto flex items-center justify-between p-4 md:p-6">
                 {/* Logo area */}
                 <div className="flex items-center gap-3">

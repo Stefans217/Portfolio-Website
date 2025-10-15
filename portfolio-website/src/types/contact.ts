@@ -12,6 +12,9 @@ export type ContactPayload = {
 
 export type ContactResponse = { ok: true; message: string } | { ok: false; fieldErrors?: Partial<Record<keyof ContactPayload, string>>; message: string };
 
+// Shared constants
+export const MESSAGE_MAX_LENGTH = 1000;
+
 // Minimal validator without extra deps
 /**
  * Minimal runtime validation without pulling a schema lib.
@@ -25,17 +28,18 @@ export function validateContact(input: Partial<ContactPayload>): {
     const errors: Partial<Record<keyof ContactPayload, string>> = {};
 
     const name = (input.name ?? "").trim();
-    if (!name) errors.name = "Name is required";
+    if (!name) errors.name = "";
 
     const email = (input.email ?? "").trim();
     // simple email check
     const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email) errors.email = "Email is required";
+    if (!email) errors.email = "";
     else if (!emailRe.test(email)) errors.email = "Enter a valid email";
 
     const message = (input.message ?? "").trim();
-    if (!message) errors.message = "Message is required";
+    if (!message) errors.message = "";
     else if (message.length < 10) errors.message = "Message must be at least 10 characters";
+    else if (message.length > MESSAGE_MAX_LENGTH) errors.message = `Message must be at most ${MESSAGE_MAX_LENGTH} characters`;
 
     const website = (input.website ?? "").trim();
 

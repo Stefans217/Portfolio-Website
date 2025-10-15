@@ -2,7 +2,7 @@
 
 import { useId, useState } from "react";
 import type { ContactPayload, ContactResponse } from "@/types/contact";
-import { validateContact } from "@/types/contact";
+import { MESSAGE_MAX_LENGTH, validateContact } from "@/types/contact";
 
 type SubmitState = { status: "idle" } | { status: "submitting" } | { status: "success"; message: string } | { status: "error"; message: string; fieldErrors?: Partial<Record<keyof ContactPayload, string>> };
 
@@ -31,7 +31,15 @@ export default function ContactForm() {
 
         const result = validateContact(values);
         if (!result.valid) {
-            setSubmit({ status: "error", message: "Please correct the errors and try again.", fieldErrors: result.errors });
+            setSubmit({ status: "error", message: "Please fill in all fields and try again.", fieldErrors: result.errors });
+            // Mark fields with errors as touched to reveal inline errors
+            if (result.errors) {
+                const touchedUpdate: Record<string, boolean> = {};
+                for (const k of Object.keys(result.errors)) {
+                    touchedUpdate[k] = true;
+                }
+                setTouched((prev) => ({ ...prev, ...touchedUpdate }));
+            }
             return;
         }
 
@@ -57,16 +65,12 @@ export default function ContactForm() {
 
     return (
         <form onSubmit={onSubmit} aria-describedby={`${formId}-desc`} className="mx-auto max-w-xl space-y-5">
-            <p id={`${formId}-desc`} className="text-sm text-gray-400">
-                I usually reply within 1-2 business days.
-            </p>
-
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <FormField label="Name" name="name" required value={values.name} onChange={onChange} onBlur={onBlur} error={hasError("name") ? clientErrors.name : undefined} />
                 <FormField label="Email" name="email" type="email" required value={values.email} onChange={onChange} onBlur={onBlur} error={hasError("email") ? clientErrors.email : undefined} />
             </div>
 
-            <FormTextArea label="Message" name="message" required value={values.message} onChange={onChange} onBlur={onBlur} error={hasError("message") ? clientErrors.message : undefined} rows={6} />
+            <FormTextArea label="Message" name="message" required value={values.message} onChange={onChange} onBlur={onBlur} error={hasError("message") ? clientErrors.message : undefined} rows={6} maxLength={MESSAGE_MAX_LENGTH} />
 
             {/* Honeypot: hidden from users, visible to bots */}
             <div className="sr-only" aria-hidden>
@@ -122,7 +126,7 @@ function FormField({ label, name, value, onChange, onBlur, type = "text", requir
                 onBlur={onBlur}
                 aria-invalid={Boolean(error)}
                 aria-describedby={describedBy}
-                className="block w-full rounded-md border border-white/10 bg-black/20 px-3 py-2 text-sm text-white placeholder-gray-500 outline-none focus:border-white/30 focus:ring-0"
+                className="block w-full rounded-md border border-white/10 bg-white/10 px-3 py-2 text-sm text-white placeholder-gray-500 outline-none focus:border-white/30 focus:ring-0"
                 placeholder={typeof label === "string" ? label.replace(/ \(optional\)/, "") : ""}
                 autoComplete={name === "email" ? "email" : name === "name" ? "name" : "on"}
             />
@@ -144,9 +148,10 @@ type TextAreaProps = {
     rows?: number;
     required?: boolean;
     error?: string;
+    maxLength?: number;
 };
 
-function FormTextArea({ label, name, value, onChange, onBlur, rows = 3, required, error }: TextAreaProps) {
+function FormTextArea({ label, name, value, onChange, onBlur, rows = 3, required, error, maxLength }: TextAreaProps) {
     const id = `${name}`;
     const describedBy = error ? `${id}-error` : undefined;
     return (
@@ -154,10 +159,15 @@ function FormTextArea({ label, name, value, onChange, onBlur, rows = 3, required
             <label htmlFor={id} className="mb-1 block text-sm font-medium text-gray-200">
                 {label} {required ? <span className="text-red-400">*</span> : null}
             </label>
-            <textarea id={id} name={name} value={value} onChange={onChange} onBlur={onBlur} rows={rows} aria-invalid={Boolean(error)} aria-describedby={describedBy} className="block w-full resize-y rounded-md border border-white/10 bg-black/20 px-3 py-2 text-sm text-white placeholder-gray-500 outline-none focus:border-white/30 focus:ring-0" placeholder="How can I help?" />
+            <textarea id={id} name={name} value={value} onChange={onChange} onBlur={onBlur} rows={rows} aria-invalid={Boolean(error)} aria-describedby={describedBy} className="block w-full resize-y rounded-md border border-white/10 bg-white/10 px-3 py-2 text-sm text-white placeholder-gray-500 outline-none focus:border-white/30 focus:ring-0" placeholder="How can I help?" maxLength={maxLength} />
             {error ? (
                 <p id={`${id}-error`} className="mt-1 text-xs text-red-400">
                     {error}
+                </p>
+            ) : null}
+            {typeof maxLength === "number" ? (
+                <p className="mt-1 text-right text-xs text-gray-400">
+                    {value.length} / {maxLength}
                 </p>
             ) : null}
         </div>
