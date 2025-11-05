@@ -1,0 +1,28 @@
+{
+    "featuredSkills": [
+        {   
+            "id": 1,
+            "name": "Web Development",
+            "iconSrc": "",
+            "details": ""
+        },
+        {
+            "id": 2,
+            "name": "Networking (CCNA)",
+            "iconSrc": "",
+            "details": ""
+        },
+        {
+            "id": 3,
+            "name": "Database Management (SQL)",
+            "iconSrc": "",
+            "details": ""
+        },
+        {
+            "id": 4,
+            "name": "Cloud and Virtualization (AWS, Virt-Manager)",
+            "iconSrc": "",
+            "details": ""
+        }
+    ]
+}
