@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/types/project";
+import ImageCarousel from "@/components/ImageCarousel";
 
 type Props = {
   project: Project;
@@ -8,31 +8,19 @@ type Props = {
 };
 
 export default function ProjectSection({ project, reversed = false }: Props) {
-  const { title, description, tags, href, repo, imageSrc } = project;
+  const { title, description, tags, href, repo, imageSrc, images } = project;
+  
+  // Use images array if available, otherwise fallback to imageSrc
+  const carouselImages = images && images.length > 0 ? images : (imageSrc ? [imageSrc] : []);
   
   return (
     <section className="w-full">
       <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-center">
         
-        {/* Image Card */}
+        {/* Image Card with Carousel */}
         <div className={`${reversed ? 'md:order-2' : 'md:order-1'} order-1 md:col-span-3`}>
           <div className="relative rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-700/50 bg-white dark:bg-gray-800/50 backdrop-blur-sm group h-80 md:h-[32rem]">
-            {imageSrc ? (
-              <>
-                <Image
-                  src={imageSrc}
-                  alt={`${title} preview image`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover opacity-90 group-hover:opacity-100 transition-opacity"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
-              </>
-            ) : (
-              <div className="w-full h-full flex items-center justify-center text-gray-400 dark:text-gray-600">
-                No image
-              </div>
-            )}
+            <ImageCarousel images={carouselImages} alt={title} />
           </div>
         </div>
 

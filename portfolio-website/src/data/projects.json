@@ -2,17 +2,25 @@
   "allProjects": [
     {
       "id": "p1",
-      "title": "Interactive Globe",
-      "description": "3D WebGL globe with real-time markers and smooth interactions.",
+      "title": "QuizGen - Canvas Quiz Generator",
+      "description": "QuizGen uses OpenAI's LLMs to generate plug-and-play QTI 2.2 quizzes for Canvas LMS, boosting productivity for educators.",
       "tags": [
-        "Next.js",
-        "Three.js",
+        "Vite",
+        "Express.js",
         "TypeScript",
-        "hello"
+        "Prisma",
+        "PostgreSQL",
+        "Vercel Deployment Tools",
+        "CI/CD"
       ],
       "href": "#",
       "repo": "#",
-      "imageSrc": "/globe.svg"
+      "images": [
+        "/images/QuizGen/QuizGen_Quiz.png",
+        "/images/QuizGen/QuizGen_QuizArea.png",
+        "/images/QuizGen/QuizGen_QuizHistory.png",
+        "/images/QuizGen/QuizHistory_ViewQuestions.png"
+      ]
     },
     {
       "id": "p2",
@@ -25,7 +33,11 @@
       ],
       "href": "#",
       "repo": "#",
-      "imageSrc": "/window.svg"
+      "images": [
+        "/window.svg",
+        "/vercel.svg",
+        "/globe.svg"
+      ]
     },
     {
       "id": "p3",
@@ -38,7 +50,11 @@
       ],
       "href": "#",
       "repo": "#",
-      "imageSrc": "/vercel.svg"
+      "images": [
+        "/vercel.svg",
+        "/globe.svg",
+        "/window.svg"
+      ]
     }
   ]
 }
