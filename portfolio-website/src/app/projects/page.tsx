@@ -1,6 +1,9 @@
 import ProjectSectionLeft from "@/components/ProjectSectionLeft";
 import ProjectSectionRight from "@/components/ProjectSectionRight";
-import { allProjects } from "@/data/projects";
+import projectsData from "@/data/projects.json";
+import type { Project } from "@/types/project";
+
+const allProjects: Project[] = (projectsData.allProjects as unknown as Project[]) || [];
 
 export default function ProjectsPage() {
   return (
@@ -11,7 +14,7 @@ export default function ProjectsPage() {
         <p className="mt-3 text-gray-600 dark:text-gray-400">A selection of my work, alternating layouts as you scroll.</p>
       </div>
 
-      {allProjects.map((project, idx) => (
+  {allProjects.map((project, idx) => (
         idx % 2 === 0 ? (
           <ProjectSectionRight key={project.id} project={project} />
         ) : (

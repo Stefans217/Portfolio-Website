@@ -1,28 +1,64 @@
 {
-    "featuredSkills": [
-        {   
+    "allSkills": [
+        {
             "id": 1,
             "name": "Web Development",
             "iconSrc": "",
-            "details": ""
+            "details": "Building responsive and modern web applications using HTML, CSS, JavaScript, and frameworks like React and Next.js"
         },
         {
             "id": 2,
             "name": "Networking (CCNA)",
             "iconSrc": "",
-            "details": ""
+            "details": "Understanding of network protocols, routing, switching, and network security fundamentals"
         },
         {
             "id": 3,
             "name": "Database Management (SQL)",
             "iconSrc": "",
-            "details": ""
+            "details": "Designing and managing relational databases with SQL, query optimization, and data modeling"
         },
         {
             "id": 4,
             "name": "Cloud and Virtualization (AWS, Virt-Manager)",
             "iconSrc": "",
-            "details": ""
+            "details": "Deploying and managing cloud infrastructure, virtual machines, and containerized applications"
+        },
+        {
+            "id": 5,
+            "name": "Python Programming",
+            "iconSrc": "",
+            "details": "Developing automation scripts, data analysis tools, and backend services using Python"
+        },
+        {
+            "id": 6,
+            "name": "Linux System Administration",
+            "iconSrc": "",
+            "details": "Managing Linux servers, shell scripting, process management, and system configuration"
+        },
+        {
+            "id": 7,
+            "name": "Git & Version Control",
+            "iconSrc": "",
+            "details": "Managing code repositories, branching strategies, and collaborative development workflows"
+        },
+        {
+            "id": 8,
+            "name": "Docker & Containers",
+            "iconSrc": "",
+            "details": "Creating containerized applications, managing Docker images, and orchestrating with Docker Compose"
+        },
+        {
+            "id": 9,
+            "name": "API Development",
+            "iconSrc": "",
+            "details": "Building RESTful APIs, handling authentication, and integrating third-party services"
+        },
+        {
+            "id": 10,
+            "name": "TypeScript",
+            "iconSrc": "",
+            "details": "Writing type-safe JavaScript code with strong typing, interfaces, and modern ES features"
         }
     ]
 }

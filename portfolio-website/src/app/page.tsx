@@ -1,34 +1,48 @@
 // this is the main landing page of the website
 import Hero from "@/components/Hero";
 import ProjectsGrid from "@/components/ProjectsGrid";
+import SkillsGrid from "@/components/SkillsGrid";
 import aboutData from "@/data/about.json";
-import { featuredProjects } from "@/data/projects";
-import { featuredSkills } from "@/data/skills";
+import projectsData from "@/data/projects.json";
+import type { Project } from "@/types/project";
+import skillsData from "@/data/skills.json";
+import type { Skill } from "@/types/skill";
 
-export default function Page0() {
+//define projects and skills with type safety.
+const allProjects: Project[] = (projectsData.allProjects as unknown as Project[]) || [];
+const allSkills: Skill[] = (skillsData.allSkills as unknown as Skill[]) || [];
+
+export default function Home() {
   return (
-    <main className="mx-auto max-w-5xl px-4 md:px-6">
+    <main className="mx-auto max-w-5xl px-4 md:px-6 pb-16">
 
-      {/*Name and Photo*/}
-      <Hero name="Stefan Spataro" title="IT and Software Engineer" photoSrc="/images/MountainPhoto.jpg" />
-
-      {/* About Me */}
-      <section className="py-4">
-        <h2 className="text-xl md:text-2xl font-semibold mb-4">About Me</h2>
-        <hr aria-hidden="true" className="my-4 border-t border-gray-200 dark:border-gray-700" />
-        <p className="text-gray-700 dark:text-gray-400">{aboutData.aboutMe}</p> 
-      </section>
-    
-      <section className="mt-4 py-4">
-        <h2 className="text-xl md:text-2xl font-semibold mb-4">Skills</h2>
-        <SkillsGrid skills={featuredSkills}/>
+      {/* Hero Section */}
+      <section className="mb-16">
+        <Hero name="Stefan Spataro" title="IT and Software Engineer" photoSrc="/images/MountainPhoto.jpg" />
       </section>
 
-      {/*Featured Projects*/}Featured Projects
+      {/* About Me Section */}
+      <section className="mb-16">
+        <div className="border-b border-gray-200 dark:border-gray-700 pb-2 mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">About Me</h2>
+        </div>
+        <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">{aboutData.aboutMe}</p> 
+      </section>
 
-      <section className="mt-4 py-4">
-        <h2 className="text-xl md:text-2xl font-semibold mb-4">Featured Projects</h2>
-        <ProjectsGrid projects={featuredProjects} />
+      {/* Skills Section */}
+      <section className="mb-16">
+        <div className="border-b border-gray-200 dark:border-gray-700 pb-2 mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Skills</h2>
+        </div>
+        <SkillsGrid skills={allSkills}/>
+      </section>
+
+      {/* Featured Projects Section */}
+      <section className="mb-16">
+        <div className="border-b border-gray-200 dark:border-gray-700 pb-2 mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Featured Projects</h2>
+        </div>
+        <ProjectsGrid projects={allProjects} />
       </section>
 
     </main>
