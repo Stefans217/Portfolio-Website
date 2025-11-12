@@ -6,12 +6,32 @@ import { Skill } from "@/types/skill";
 
 type SkillsGridProps = {
     skills: Skill[];
+    onExpand?: () => void;
+    onCollapse?: () => void;
 }
 
-export default function SkillsGrid({ skills }: SkillsGridProps ){
+export default function SkillsGrid({ skills, onExpand, onCollapse }: SkillsGridProps ){
     const [isExpanded, setIsExpanded] = useState(false);
     const shouldShowButton = skills.length > 6;
     const displayedSkills = shouldShowButton && !isExpanded ? skills.slice(0, 6) : skills;
+
+    const handleToggle = () => {
+        const newExpandedState = !isExpanded;
+        setIsExpanded(newExpandedState);
+        
+        if (newExpandedState && onExpand) {
+            // Small delay to allow the animation to start before scrolling
+            setTimeout(() => {
+                onExpand();
+            }, 100);
+        }
+        else if (!newExpandedState && onCollapse) {
+            // Small delay to allow the animation to start before scrolling
+            setTimeout(() => {
+                onCollapse();
+            }, 100);
+        }
+    };
 
     return(
         <div className="w-full">
@@ -24,7 +44,7 @@ export default function SkillsGrid({ skills }: SkillsGridProps ){
             {shouldShowButton && (
                 <div className="mt-8 text-center">
                     <button
-                        onClick={() => setIsExpanded(!isExpanded)}
+                        onClick={handleToggle}
                         className="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                     >
                         {isExpanded ? (
