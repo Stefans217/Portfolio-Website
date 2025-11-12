@@ -7,7 +7,6 @@ export default function ProjectCard({
   title,
   description,
   tags = [],
-  href,
   repo,
   imageSrc,
 }: Project) {
@@ -41,22 +40,14 @@ export default function ProjectCard({
             ))}
           </ul>
         ) : null}
-        {(href || repo) && (
+        {repo && (
           <div className="mt-2 flex items-center gap-4 pt-2 border-t border-gray-100 dark:border-gray-700">
-            {href && (
-              <Link
-                href={href}
-                className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 flex items-center gap-1"
-              >
-                Live →
-              </Link>
-            )}
             {repo && (
               <Link
                 href={repo}
                 className="text-sm text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 flex items-center gap-1"
               >
-                Code →
+                View the Repo →
               </Link>
             )}
           </div>
