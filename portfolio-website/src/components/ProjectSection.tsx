@@ -46,22 +46,16 @@ export default function ProjectSection({ project, reversed = false }: Props) {
             </ul>
           ) : null}
           
-          {(href || repo) && (
+          {(repo) && (
             <div className="flex items-center gap-4">
-              {href && (
-                <Link
-                  href={href}
-                  className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 flex items-center gap-1 transition-colors"
-                >
-                  Live Demo →
-                </Link>
-              )}
               {repo && (
                 <Link
                   href={repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 flex items-center gap-1 transition-colors"
                 >
-                  View Code →
+                  View the Repo →
                 </Link>
               )}
             </div>

@@ -14,18 +14,19 @@
         "CI/CD"
       ],
       "href": "#",
-      "repo": "#",
+      "repo": "https://github.com/Stefans217/QuizGen",
       "images": [
         "/images/QuizGen/QuizGen_Quiz.png",
         "/images/QuizGen/QuizGen_QuizArea.png",
         "/images/QuizGen/QuizGen_QuizHistory.png",
-        "/images/QuizGen/QuizHistory_ViewQuestions.png"
+        "/images/QuizGen/QuizHistory_ViewQuestions.png",
+        "/images/QuizGen/QuizGen_Register.png"
       ]
     },
     {
       "id": "p2",
-      "title": "Window Manager UI",
-      "description": "Desktop-like windowing interface for the web with drag & snap.",
+      "title": "Clearjar",
+      "description": "AI financial chatbot that helps users manage expenses through detailed and formatted responses.",
       "tags": [
         "React",
         "Zustand",
@@ -34,27 +35,15 @@
       "href": "#",
       "repo": "#",
       "images": [
-        "/window.svg",
-        "/vercel.svg",
-        "/globe.svg"
-      ]
-    },
-    {
-      "id": "p3",
-      "title": "Performance Dashboard",
-      "description": "Analytics dashboard with charts, filters, and lazy data loading.",
-      "tags": [
-        "Next.js",
-        "Prisma",
-        "PostgreSQL"
-      ],
-      "href": "#",
-      "repo": "#",
-      "images": [
-        "/vercel.svg",
-        "/globe.svg",
-        "/window.svg"
+        "/images/Clearjar/chat1.png",
+        "/images/Clearjar/chat2.png",
+        "/images/Clearjar/insights1.png",
+        "/images/Clearjar/landing_dark.png",
+        "/images/Clearjar/landing_dark2.png",
+        "/images/Clearjar/landing_light.png",
+        "/images/Clearjar/login.png"
       ]
     }
+    
   ]
 }
