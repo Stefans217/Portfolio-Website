@@ -36,7 +36,14 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="mb-16">
-        <Hero name="Stefan Spataro" title="IT and Software Engineer" photoSrc="/images/MountainPhoto.jpg" />
+        <Hero 
+          name="Stefan Spataro" 
+          title="IT and Software Engineer" 
+          photoSrc={[
+            "/images/MountainPhoto.jpg",
+            "/images/ProfessionalVothPhoto.jpg"
+          ]} 
+        />
       </section>
 
       {/* About Me Section */}

@@ -1,36 +1,36 @@
 "use client";
 
-import Image from "next/image";
+import ImageCarousel from "./ImageCarousel";
 
 type HeroProps = {
   name: string;
   title: string;
-  photoSrc: string;
+  photoSrc: string | string[];
 };
 
 export default function Hero({ name, title, photoSrc }: HeroProps) {
+  // Convert single image to array for compatibility
+  const images = Array.isArray(photoSrc) ? photoSrc : [photoSrc];
+
   return (
     <section className="relative w-full py-12 md:py-20">
       <div className="relative flex flex-col items-center gap-6 md:gap-10">
         
         {/* Combined image, name, and title */}
-        <div className="relative w-full md:w-2/3 h-auto">
+        <div className="relative w-full md:w-1/2 h-auto">
 
-          {/* Background image */}
+          {/* Background image carousel */}
           <div className="relative w-full h-80 md:h-[28rem] rounded-2xl overflow-hidden shadow-lg">
-            <Image
-              src={photoSrc}
+            <ImageCarousel
+              images={images}
               alt={`${name} background`}
-              fill
-              className="object-cover object-center"
-              priority
             />
             {/* subtle overlay for text readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
           </div>
 
-          {/* Name and title overlayed spilling over the top and left */}
-          <div className="absolute -top-6 -left-6 bg-white/70 dark:bg-gray-900/70 backdrop-blur-md p-6 rounded-xl shadow-md max-w-md">
+          {/* Name and title overlayed at the top left */}
+          <div className="absolute -top-10 -left-10 bg-white/70 dark:bg-gray-900/70 backdrop-blur-md p-6 rounded-xl shadow-md max-w-md">
             <h1 className="text-3xl md:text-5xl font-semibold text-gray-900 dark:text-gray-100">
               {name}
             </h1>

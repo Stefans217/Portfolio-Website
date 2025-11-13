@@ -43,6 +43,21 @@
         "/images/Clearjar/landing_light.png",
         "/images/Clearjar/login.png"
       ]
+    },
+    {
+      "id": "p3",
+      "title": "Personal Portfolio Website",
+      "description": "Description for project 3.",
+      "tags": [
+        "Tag1",
+        "Tag2"
+      ],
+      "href": "#",
+      "repo": "#",
+      "images": [
+        "/images/project3/image1.png",
+        "/images/project3/image2.png"
+      ]
     }
     
   ]
