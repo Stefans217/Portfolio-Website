@@ -2,9 +2,36 @@ import { NextResponse } from "next/server";
 import type { ContactPayload, ContactResponse } from "@/types/contact";
 import { validateContact } from "@/types/contact";
 import prisma from "@/lib/prisma";
+import { cookies } from "next/headers";
+import { verifySession } from "@/lib/auth";
 
 // Prisma requires the Node.js runtime (not Edge)
 export const runtime = "nodejs";
+
+// GET /api/contact
+// Fetch all contact messages (protected)
+export async function GET() {
+  try {
+    const cookieStore = await cookies();
+    const sessionToken = cookieStore.get("session_token")?.value;
+    
+    if (!sessionToken || !verifySession(sessionToken)) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const messages = await prisma.contactMessage.findMany({
+      orderBy: { createdAt: "desc" },
+    });
+
+    return NextResponse.json({ messages });
+  } catch (err) {
+    console.error("[contact] error", err);
+    return NextResponse.json(
+      { error: "Something went wrong." },
+      { status: 500 }
+    );
+  }
+}
 
 // POST /api/contact
 // Note: This endpoint is intentionally simple; in production consider
