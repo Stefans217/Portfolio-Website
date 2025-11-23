@@ -1,6 +1,5 @@
 "use client";
 
-// this is the main landing page of the website
 import Hero from "@/components/Hero";
 import ProjectsGrid from "@/components/ProjectsGrid";
 import SkillsGrid from "@/components/SkillsGrid";
@@ -11,7 +10,6 @@ import skillsData from "@/data/skills.json";
 import type { Skill } from "@/types/skill";
 import { useRef } from "react";
 
-//define projects and skills with type safety.
 const allProjects: Project[] = (projectsData.allProjects as unknown as Project[]) || [];
 const allSkills: Skill[] = (skillsData.allSkills as unknown as Skill[]) || [];
 
@@ -20,13 +18,13 @@ export default function Home() {
 
   const scrollToSkills = () => {
     if (skillsSectionRef.current) {
-      const headerOffset = 0; // Adjust if you have a sticky header
+      const headerOffset = 0;
       const elementPosition = skillsSectionRef.current.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: "smooth"
       });
     }
   };

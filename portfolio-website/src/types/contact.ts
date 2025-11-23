@@ -3,14 +3,20 @@
  * Keeping this as a single source of truth ensures consistent validation.
  */
 export type ContactPayload = {
-    name: string;
-    email: string;
-    message: string;
-    // honeypot to deter basic bots; should be empty
-    website?: string;
+  name: string;
+  email: string;
+  message: string;
+  // honeypot to deter basic bots; should be empty
+  website?: string;
 };
 
-export type ContactResponse = { ok: true; message: string } | { ok: false; fieldErrors?: Partial<Record<keyof ContactPayload, string>>; message: string };
+export type ContactResponse =
+  | { ok: true; message: string }
+  | {
+      ok: false;
+      fieldErrors?: Partial<Record<keyof ContactPayload, string>>;
+      message: string;
+    };
 
 // Shared constants
 export const MESSAGE_MAX_LENGTH = 1000;
@@ -21,38 +27,40 @@ export const MESSAGE_MAX_LENGTH = 1000;
  * Returns normalized data when valid, or field errors when invalid.
  */
 export function validateContact(input: Partial<ContactPayload>): {
-    valid: boolean;
-    data?: ContactPayload;
-    errors?: Partial<Record<keyof ContactPayload, string>>;
+  valid: boolean;
+  data?: ContactPayload;
+  errors?: Partial<Record<keyof ContactPayload, string>>;
 } {
-    const errors: Partial<Record<keyof ContactPayload, string>> = {};
+  const errors: Partial<Record<keyof ContactPayload, string>> = {};
 
-    const name = (input.name ?? "").trim();
-    if (!name) errors.name = "";
+  const name = (input.name ?? "").trim();
+  if (!name) errors.name = "";
 
-    const email = (input.email ?? "").trim();
-    // simple email check
-    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email) errors.email = "";
-    else if (!emailRe.test(email)) errors.email = "Enter a valid email";
+  const email = (input.email ?? "").trim();
+  // simple email check
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email) errors.email = "";
+  else if (!emailRe.test(email)) errors.email = "Enter a valid email";
 
-    const message = (input.message ?? "").trim();
-    if (!message) errors.message = "";
-    else if (message.length < 10) errors.message = "Message must be at least 10 characters";
-    else if (message.length > MESSAGE_MAX_LENGTH) errors.message = `Message must be at most ${MESSAGE_MAX_LENGTH} characters`;
+  const message = (input.message ?? "").trim();
+  if (!message) errors.message = "";
+  else if (message.length < 10)
+    errors.message = "Message must be at least 10 characters";
+  else if (message.length > MESSAGE_MAX_LENGTH)
+    errors.message = `Message must be at most ${MESSAGE_MAX_LENGTH} characters`;
 
-    const website = (input.website ?? "").trim();
+  const website = (input.website ?? "").trim();
 
-    if (website) {
-        // Honeypot filled -> treat as invalid silently
-        errors.website = "Invalid";
-    }
+  if (website) {
+    // Honeypot filled -> treat as invalid silently
+    errors.website = "Invalid";
+  }
 
-    const valid = Object.keys(errors).length === 0;
-    if (!valid) return { valid, errors };
+  const valid = Object.keys(errors).length === 0;
+  if (!valid) return { valid, errors };
 
-    return {
-        valid: true,
-        data: { name, email, message, website: website || undefined },
-    };
+  return {
+    valid: true,
+    data: { name, email, message, website: website || undefined },
+  };
 }

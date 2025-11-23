@@ -1,4 +1,3 @@
-// displays a single project in the projects and landing page.
 import Link from "next/link";
 import Image from "next/image";
 import type { Project } from "@/types/project";
@@ -42,14 +41,12 @@ export default function ProjectCard({
         ) : null}
         {repo && (
           <div className="mt-2 flex items-center gap-4 pt-2 border-t border-gray-100 dark:border-gray-700">
-            {repo && (
-              <Link
-                href={repo}
-                className="text-sm text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 flex items-center gap-1"
-              >
-                View the Repo →
-              </Link>
-            )}
+            <Link
+              href={repo}
+              className="text-sm text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 flex items-center gap-1"
+            >
+              View the Repo →
+            </Link>
           </div>
         )}
       </div>
