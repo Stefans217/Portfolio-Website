@@ -33,6 +33,38 @@ export async function GET() {
   }
 }
 
+// DELETE /api/contact
+// Delete a contact message (protected)
+export async function DELETE(req: Request) {
+  try {
+    const cookieStore = await cookies();
+    const sessionToken = cookieStore.get("session_token")?.value;
+
+    if (!sessionToken || !verifySession(sessionToken)) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json({ error: "Missing id" }, { status: 400 });
+    }
+
+    await prisma.contactMessage.delete({
+      where: { id },
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error("[contact] delete error", err);
+    return NextResponse.json(
+      { error: "Something went wrong." },
+      { status: 500 }
+    );
+  }
+}
+
 // POST /api/contact
 // Note: This endpoint is intentionally simple; in production consider
 // adding rate limiting and a mail provider. Keep validation shared

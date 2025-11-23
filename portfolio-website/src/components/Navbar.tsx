@@ -44,6 +44,12 @@ export default function Navbar() {
             My Projects
           </Link>
           <Link
+            href="/blog"
+            className="text-sm text-gray-200 hover:text-[#c29a62]"
+          >
+            Blog
+          </Link>
+          <Link
             href="/contact"
             className="text-sm text-gray-200 hover:text-[#c29a62]"
           >
@@ -118,6 +124,9 @@ export default function Navbar() {
             </Link>
             <Link href="/projects" className="block text-gray-600">
               My Projects
+            </Link>
+            <Link href="/blog" className="block text-gray-600">
+              Blog
             </Link>
             <Link href="/contact" className="block text-gray-600">
               Contact Me
