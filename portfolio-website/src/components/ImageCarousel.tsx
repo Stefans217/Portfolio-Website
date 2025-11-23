@@ -93,18 +93,22 @@ export default function ImageCarousel({ images, alt }: ImageCarouselProps) {
           </button>
 
           {/* Dots Indicator */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2.5 bg-black/40 px-4 py-2 rounded-full backdrop-blur-sm z-10">
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 bg-black/40 px-4 py-2 rounded-full backdrop-blur-sm z-10">
             {images.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? "bg-white w-8 h-2.5 shadow-sm"
-                    : "bg-white/60 hover:bg-white/90 w-2.5 h-2.5"
-                }`}
+                className="w-4 h-4 flex items-center justify-center"
                 aria-label={`Go to image ${index + 1}`}
-              />
+              >
+                <div
+                  className={`rounded-full transition-all duration-300 ${
+                    index === currentIndex
+                      ? "bg-white w-4 h-4 shadow-sm"
+                      : "bg-white/60 hover:bg-white/90 w-2.5 h-2.5"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </>

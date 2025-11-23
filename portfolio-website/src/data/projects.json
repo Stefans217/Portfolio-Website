@@ -26,7 +26,7 @@
     {
       "id": "p2",
       "title": "Clearjar",
-      "description": "AI financial chatbot that helps users manage expenses through detailed and formatted responses.",
+      "description": "AI financial chatbot that helps users manage expenses and get detailed insights into their spending habits.",
       "tags": [
         "React",
         "Zustand",
