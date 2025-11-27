@@ -48,7 +48,7 @@ export default function BlogList({ posts }: Props) {
             <div className="mb-8">
                 <div className="flex flex-wrap justify-center gap-2">
                     {categories.map((category) => (
-                        <button key={category} onClick={() => setSelectedCategory(category as BlogCategory | "ALL")} className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${selectedCategory === category ? "bg-blue-600 text-white" : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-300"}`}>
+                        <button key={category} onClick={() => setSelectedCategory(category as BlogCategory | "ALL")} className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${selectedCategory === category ? "text-white theme-accent" : "card-bg text-foreground hover:bg-gray-800 border border-gray-700"}`}>
                             {category === "ALL" ? "All Posts" : BLOG_CATEGORIES[category as BlogCategory]}
                         </button>
                     ))}
@@ -56,7 +56,7 @@ export default function BlogList({ posts }: Props) {
             </div>
 
             {/* Posts Count */}
-            <p className="text-center text-sm text-gray-500 mb-6">
+            <p className="text-center text-sm text-muted mb-6">
                 Showing {filteredPosts.length} {filteredPosts.length === 1 ? "post" : "posts"}
                 {selectedCategory !== "ALL" && ` in ${BLOG_CATEGORIES[selectedCategory]}`}
             </p>
@@ -64,7 +64,7 @@ export default function BlogList({ posts }: Props) {
             {/* Posts Grid */}
             <div className="space-y-8">
                 {filteredPosts.length === 0 ? (
-                    <p className="text-center text-gray-500">No blog posts in this category yet.</p>
+                    <p className="text-center text-muted">No blog posts in this category yet.</p>
                 ) : (
                     filteredPosts.map((post) => {
                         const isExpanded = expandedPosts.has(post.id);
@@ -104,12 +104,12 @@ const BlogPostCard = memo(function BlogPostCard({ post, isExpanded, shouldCollap
     }, [onToggle, post.id]);
 
     return (
-        <article className="bg-white rounded-lg shadow-md overflow-hidden p-6 transition-all duration-300 ease-in-out">
+        <article className="card-bg rounded-lg shadow-md overflow-hidden p-6 transition-all duration-300 ease-in-out border border-gray-700">
             <div className="flex items-center justify-between mb-2">
                 <span className={`px-3 py-1 text-xs font-medium rounded-full ${getCategoryColor(post.category)}`}>{BLOG_CATEGORIES[post.category]}</span>
-                <p className="text-sm text-gray-500">{formatDate(post.createdAt)}</p>
+                <p className="text-sm text-muted">{formatDate(post.createdAt)}</p>
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">{post.title}</h2>
+            <h2 className="text-2xl font-bold text-foreground mb-4">{post.title}</h2>
 
             <div className="relative">
                 <div
@@ -122,12 +122,12 @@ const BlogPostCard = memo(function BlogPostCard({ post, isExpanded, shouldCollap
                 />
 
                 {/* Gradient fade overlay when collapsed */}
-                {shouldCollapse && !isExpanded && <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none" />}
+                {shouldCollapse && !isExpanded && <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-900 to-transparent pointer-events-none" />}
             </div>
 
             {/* Expand/Collapse Button */}
             {shouldCollapse && (
-                <button onClick={handleToggle} className="mt-4 flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200">
+                <button onClick={handleToggle} className="mt-4 flex items-center gap-2 text-accent-2 hover:text-accent font-medium transition-colors duration-200">
                     <span>{isExpanded ? "Show less" : "Read more"}</span>
                     <svg className={`w-4 h-4 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -140,13 +140,13 @@ const BlogPostCard = memo(function BlogPostCard({ post, isExpanded, shouldCollap
 
 function getCategoryColor(category: BlogCategory): string {
     const colors: Record<BlogCategory, string> = {
-        NETWORKING: "bg-purple-100 text-purple-800",
-        TUTORIALS: "bg-green-100 text-green-800",
-        RANDOM: "bg-yellow-100 text-yellow-800",
-        TECH_NEWS: "bg-blue-100 text-blue-800",
-        PERSONAL: "bg-pink-100 text-pink-800",
+        NETWORKING: "bg-purple-900/50 text-purple-300 border border-purple-700",
+        TUTORIALS: "bg-green-900/50 text-green-300 border border-green-700",
+        RANDOM: "bg-yellow-900/50 text-yellow-300 border border-yellow-700",
+        TECH_NEWS: "bg-blue-900/50 text-blue-300 border border-blue-700",
+        PERSONAL: "bg-pink-900/50 text-pink-300 border border-pink-700",
     };
-    return colors[category] || "bg-gray-100 text-gray-800";
+    return colors[category] || "bg-gray-800 text-gray-300 border border-gray-700";
 }
 
 function formatDate(dateString: string): string {

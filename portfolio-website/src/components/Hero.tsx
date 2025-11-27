@@ -25,7 +25,7 @@ export default function Hero({ name, title, photoSrc }: HeroProps) {
                     </div>
 
                     {/* Name and title overlayed at the top left */}
-                    <div className="absolute -top-10 -left-10 bg-white/70 dark:bg-gray-900/70 backdrop-blur-md p-6 rounded-xl shadow-md max-w-md">
+                    <div className="absolute -top-10 -left-10 card-bg backdrop-blur-md p-6 rounded-xl shadow-md max-w-md border border-gray-700">
                         <h1 className="text-3xl md:text-5xl font-semibold text-foreground">{name}</h1>
                         <p className="text-lg md:text-xl text-muted mt-2">{title}</p>
                     </div>

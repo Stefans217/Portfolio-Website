@@ -42,9 +42,9 @@ async function BlogPosts() {
 
 export default function BlogPage() {
     return (
-        <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
-                <h1 className="text-4xl font-bold text-gray-900 mb-8 text-center">Blog</h1>
+                <h1 className="text-4xl font-bold text-foreground mb-8 text-center">Blog</h1>
                 <Suspense fallback={<BlogSkeleton />}>
                     <BlogPosts />
                 </Suspense>
@@ -61,28 +61,28 @@ function BlogSkeleton() {
             <div className="mb-8">
                 <div className="flex flex-wrap justify-center gap-2">
                     {[1, 2, 3, 4, 5, 6].map((i) => (
-                        <div key={i} className="h-10 w-24 bg-gray-200 rounded-full animate-pulse" />
+                        <div key={i} className="h-10 w-24 bg-gray-800 rounded-full animate-pulse" />
                     ))}
                 </div>
             </div>
 
             {/* Post count skeleton */}
             <div className="flex justify-center mb-6">
-                <div className="h-4 w-32 bg-gray-200 rounded animate-pulse" />
+                <div className="h-4 w-32 bg-gray-800 rounded animate-pulse" />
             </div>
 
             {/* Post cards skeleton */}
             {[1, 2, 3].map((i) => (
-                <article key={i} className="bg-white rounded-lg shadow-md p-6 animate-pulse">
+                <article key={i} className="card-bg rounded-lg shadow-md p-6 animate-pulse border border-gray-700">
                     <div className="flex items-center justify-between mb-2">
-                        <div className="h-6 w-20 bg-gray-200 rounded-full" />
-                        <div className="h-4 w-24 bg-gray-200 rounded" />
+                        <div className="h-6 w-20 bg-gray-800 rounded-full" />
+                        <div className="h-4 w-24 bg-gray-800 rounded" />
                     </div>
-                    <div className="h-8 w-3/4 bg-gray-200 rounded mb-4" />
+                    <div className="h-8 w-3/4 bg-gray-800 rounded mb-4" />
                     <div className="space-y-2">
-                        <div className="h-4 w-full bg-gray-200 rounded" />
-                        <div className="h-4 w-full bg-gray-200 rounded" />
-                        <div className="h-4 w-2/3 bg-gray-200 rounded" />
+                        <div className="h-4 w-full bg-gray-800 rounded" />
+                        <div className="h-4 w-full bg-gray-800 rounded" />
+                        <div className="h-4 w-2/3 bg-gray-800 rounded" />
                     </div>
                 </article>
             ))}
