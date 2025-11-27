@@ -1,21 +1,29 @@
 @import "tailwindcss";
 
+/* Theme variables (centralized) - keep palette aligned with blog styles */
 :root {
-  --background: #b0b0b0;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --background: #f9fafb; /* tailwind gray-50 */
+  --foreground: #111827; /* heading / primary text */
+  --muted: #374151; /* paragraph / muted text */
+  --link: #2563eb; /* link blue */
+  --link-hover: #1d4ed8;
+  --card-bg: #ffffff;
+  --code-bg: #f3f4f6;
+  --pre-bg: #1f2937;
+  --blockquote-border: #d1d5db;
+  --hr: #e5e7eb;
+  --accent: #366899; /* existing accent used in navbar/contact */
+  --accent-2: #c29a62; /* secondary accent (hover) */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --muted: #9ca3af;
+    --card-bg: #0b1220;
+    --code-bg: #111827;
+    --pre-bg: #0b1220;
   }
 }
 
@@ -25,14 +33,27 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Blog content markdown styling */
+/* Utility theme classes for components to reuse variables */
+.theme-accent { background: var(--accent); }
+.text-accent { color: var(--accent); }
+.text-accent-2 { color: var(--accent-2); }
+.text-foreground { color: var(--foreground); }
+.text-muted { color: var(--muted); }
+.card-bg { background: var(--card-bg); }
+.code-bg { background: var(--code-bg); }
+.pre-bg { background: var(--pre-bg); color: var(--code-bg); }
+.header-link { color: rgba(229,231,235,1); /* tailwind gray-200 */ }
+.header-link:hover { color: var(--accent-2); }
+.mobile-link { color: rgba(107,114,128,1); /* tailwind gray-600 */ }
+
+/* Blog content markdown styling (use variables) */
 .blog-content h1,
 .blog-content h2,
 .blog-content h3,
 .blog-content h4,
 .blog-content h5,
 .blog-content h6 {
-  color: #111827;
+  color: var(--foreground);
   font-weight: 700;
   margin-top: 1.5em;
   margin-bottom: 0.5em;
@@ -43,48 +64,36 @@ body {
 .blog-content h3 { font-size: 1.25em; }
 
 .blog-content p {
-  color: #374151;
+  color: var(--muted);
   margin-bottom: 1em;
   line-height: 1.7;
 }
 
 .blog-content strong {
-  color: #111827;
+  color: var(--foreground);
   font-weight: 700;
 }
 
-.blog-content em {
-  font-style: italic;
-}
+.blog-content em { font-style: italic; }
 
 .blog-content a {
-  color: #2563eb;
+  color: var(--link);
   text-decoration: underline;
 }
 
-.blog-content a:hover {
-  color: #1d4ed8;
-}
+.blog-content a:hover { color: var(--link-hover); }
 
 .blog-content ul,
 .blog-content ol {
   margin: 1em 0;
   padding-left: 2em;
-  color: #374151;
+  color: var(--muted);
 }
 
-.blog-content ul {
-  list-style-type: disc;
-}
+.blog-content ul { list-style-type: disc; }
+.blog-content ol { list-style-type: decimal; }
 
-.blog-content ol {
-  list-style-type: decimal;
-}
-
-.blog-content li {
-  margin-bottom: 0.5em;
-  line-height: 1.6;
-}
+.blog-content li { margin-bottom: 0.5em; line-height: 1.6; }
 
 .blog-content li > ul,
 .blog-content li > ol {
@@ -93,7 +102,7 @@ body {
 }
 
 .blog-content blockquote {
-  border-left: 4px solid #d1d5db;
+  border-left: 4px solid var(--blockquote-border);
   padding-left: 1em;
   margin: 1em 0;
   color: #6b7280;
@@ -101,7 +110,7 @@ body {
 }
 
 .blog-content code {
-  background-color: #f3f4f6;
+  background-color: var(--code-bg);
   padding: 0.125em 0.375em;
   border-radius: 0.25em;
   font-size: 0.875em;
@@ -109,22 +118,14 @@ body {
 }
 
 .blog-content pre {
-  background-color: #1f2937;
-  color: #f3f4f6;
+  background-color: var(--pre-bg);
+  color: var(--code-bg);
   padding: 1em;
   border-radius: 0.5em;
   overflow-x: auto;
   margin: 1em 0;
 }
 
-.blog-content pre code {
-  background: none;
-  padding: 0;
-  color: inherit;
-}
+.blog-content pre code { background: none; padding: 0; color: inherit; }
 
-.blog-content hr {
-  border: none;
-  border-top: 1px solid #e5e7eb;
-  margin: 2em 0;
-}
+.blog-content hr { border: none; border-top: 1px solid var(--hr); margin: 2em 0; }
