@@ -261,7 +261,11 @@ export default function AdminPage() {
         <div className="min-h-screen bg-gray-50 p-8">
             <div className="mx-auto max-w-6xl">
                 <div className="mb-8 flex items-center justify-between">
-                    <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+                    <div className="">
+                        <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+                        <h5 className="text-3x1 font-light text-gray-400">Remember Ctrl+Shift+A for admin quick access</h5>
+                    </div>
+                    
                     <div className="flex items-center gap-4">
                         <span className="text-gray-600">Welcome, {user.name || user.email}</span>
                         <button onClick={handleLogout} className="rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300">

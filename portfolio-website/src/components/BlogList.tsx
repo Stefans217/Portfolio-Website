@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, memo, useCallback } from "react";
 import { BLOG_CATEGORIES, BlogCategory } from "@/types/blog";
 
 type BlogPost = {
@@ -28,7 +28,7 @@ export default function BlogList({ posts }: Props) {
 
     const categories = ["ALL", ...Object.keys(BLOG_CATEGORIES)] as const;
 
-    const toggleExpanded = (postId: string) => {
+    const toggleExpanded = useCallback((postId: string) => {
         setExpandedPosts((prev) => {
             const newSet = new Set(prev);
             if (newSet.has(postId)) {
@@ -38,7 +38,7 @@ export default function BlogList({ posts }: Props) {
             }
             return newSet;
         });
-    };
+    }, []);
 
     const isLongPost = (content: string) => content.length > CONTENT_COLLAPSE_THRESHOLD;
 
@@ -70,7 +70,7 @@ export default function BlogList({ posts }: Props) {
                         const isExpanded = expandedPosts.has(post.id);
                         const shouldCollapse = isLongPost(post.content);
 
-                        return <BlogPostCard key={post.id} post={post} isExpanded={isExpanded} shouldCollapse={shouldCollapse} onToggle={() => toggleExpanded(post.id)} />;
+                        return <BlogPostCard key={post.id} post={post} isExpanded={isExpanded} shouldCollapse={shouldCollapse} onToggle={toggleExpanded} />;
                     })
                 )}
             </div>
@@ -82,10 +82,11 @@ type BlogPostCardProps = {
     post: BlogPost;
     isExpanded: boolean;
     shouldCollapse: boolean;
-    onToggle: () => void;
+    onToggle: (postId: string) => void;
 };
 
-function BlogPostCard({ post, isExpanded, shouldCollapse, onToggle }: BlogPostCardProps) {
+// Memoized BlogPostCard to prevent re-renders when other posts change
+const BlogPostCard = memo(function BlogPostCard({ post, isExpanded, shouldCollapse, onToggle }: BlogPostCardProps) {
     const contentRef = useRef<HTMLDivElement>(null);
     const [contentHeight, setContentHeight] = useState<number | undefined>(undefined);
 
@@ -97,6 +98,10 @@ function BlogPostCard({ post, isExpanded, shouldCollapse, onToggle }: BlogPostCa
 
     // Collapsed height in pixels (approximately 6 lines of text)
     const collapsedHeight = 150;
+
+    const handleToggle = useCallback(() => {
+        onToggle(post.id);
+    }, [onToggle, post.id]);
 
     return (
         <article className="bg-white rounded-lg shadow-md overflow-hidden p-6 transition-all duration-300 ease-in-out">
@@ -122,7 +127,7 @@ function BlogPostCard({ post, isExpanded, shouldCollapse, onToggle }: BlogPostCa
 
             {/* Expand/Collapse Button */}
             {shouldCollapse && (
-                <button onClick={onToggle} className="mt-4 flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200">
+                <button onClick={handleToggle} className="mt-4 flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200">
                     <span>{isExpanded ? "Show less" : "Read more"}</span>
                     <svg className={`w-4 h-4 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -131,7 +136,7 @@ function BlogPostCard({ post, isExpanded, shouldCollapse, onToggle }: BlogPostCa
             )}
         </article>
     );
-}
+});
 
 function getCategoryColor(category: BlogCategory): string {
     const colors: Record<BlogCategory, string> = {

@@ -1,6 +1,8 @@
+import { Suspense } from "react";
 import prisma from "@/lib/prisma";
 import BlogList from "@/components/BlogList";
 import { marked } from "marked";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -10,27 +12,80 @@ marked.setOptions({
     gfm: true,
 });
 
-export default async function BlogPage() {
+// Separate async component for data fetching
+async function BlogPosts() {
     const posts = await prisma.blogPost.findMany({
         where: { published: true },
         orderBy: { createdAt: "desc" },
+        select: {
+            id: true,
+            title: true,
+            content: true,
+            category: true,
+            published: true,
+            createdAt: true,
+            updatedAt: true,
+        },
     });
 
     // Convert dates to strings and parse markdown on the server
     const serializedPosts = posts.map((post) => ({
         ...post,
-        content: post.content, // Keep raw content for length check
-        htmlContent: marked.parse(post.content) as string, // Pre-parsed HTML
+        content: post.content,
+        htmlContent: marked.parse(post.content) as string,
         createdAt: post.createdAt.toISOString(),
         updatedAt: post.updatedAt.toISOString(),
     }));
 
+    return <BlogList posts={serializedPosts} />;
+}
+
+export default function BlogPage() {
     return (
         <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
                 <h1 className="text-4xl font-bold text-gray-900 mb-8 text-center">Blog</h1>
-                <BlogList posts={serializedPosts} />
+                <Suspense fallback={<BlogSkeleton />}>
+                    <BlogPosts />
+                </Suspense>
             </div>
+        </div>
+    );
+}
+
+// Skeleton loader for blog posts - shows immediately
+function BlogSkeleton() {
+    return (
+        <div className="space-y-8">
+            {/* Category filter skeleton */}
+            <div className="mb-8">
+                <div className="flex flex-wrap justify-center gap-2">
+                    {[1, 2, 3, 4, 5, 6].map((i) => (
+                        <div key={i} className="h-10 w-24 bg-gray-200 rounded-full animate-pulse" />
+                    ))}
+                </div>
+            </div>
+
+            {/* Post count skeleton */}
+            <div className="flex justify-center mb-6">
+                <div className="h-4 w-32 bg-gray-200 rounded animate-pulse" />
+            </div>
+
+            {/* Post cards skeleton */}
+            {[1, 2, 3].map((i) => (
+                <article key={i} className="bg-white rounded-lg shadow-md p-6 animate-pulse">
+                    <div className="flex items-center justify-between mb-2">
+                        <div className="h-6 w-20 bg-gray-200 rounded-full" />
+                        <div className="h-4 w-24 bg-gray-200 rounded" />
+                    </div>
+                    <div className="h-8 w-3/4 bg-gray-200 rounded mb-4" />
+                    <div className="space-y-2">
+                        <div className="h-4 w-full bg-gray-200 rounded" />
+                        <div className="h-4 w-full bg-gray-200 rounded" />
+                        <div className="h-4 w-2/3 bg-gray-200 rounded" />
+                    </div>
+                </article>
+            ))}
         </div>
     );
 }
