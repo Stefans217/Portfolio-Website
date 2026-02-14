@@ -4,6 +4,7 @@ import BlogList from "@/components/BlogList";
 import { marked } from "marked";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
+export const dynamic = "force-dynamic"; // Skip prerendering, fetch data at request time
 export const revalidate = 60; // Revalidate every 60 seconds
 
 // Configure marked once at module level
