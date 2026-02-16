@@ -10,8 +10,10 @@
         "TypeScript",
         "Prisma",
         "PostgreSQL",
+        "LLM APIs",
         "Vercel Deployment Tools",
-        "CI/CD"
+        "CI/CD",
+        "Docker"
       ],
       "href": "#",
       "repo": "https://github.com/Stefans217/QuizGen",
@@ -28,9 +30,15 @@
       "title": "Clearjar",
       "description": "AI financial chatbot that helps users manage expenses and get detailed insights into their spending habits.",
       "tags": [
-        "React",
-        "Zustand",
-        "Tailwind"
+        "Next.js",
+        "Express.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Prisma",
+        "PostgreSQL",
+        "Vercel Deployment Tools",
+        "CI/CD",
+        "Docker"
       ],
       "href": "#",
       "repo": "#",
@@ -46,8 +54,8 @@
     },
     {
       "id": "p3",
-      "title": "Personal Portfolio Website",
-      "description": "The site you're looking at right now! A full-stack portfolio built with Next.js, Prisma, PostgreSQL, and Tailwind CSS, featuring a blog with Markdown support and an admin dashboard.",
+      "title": "Portfolio Website",
+      "description": "The site you're looking at right now! Featuring Home & About pages, a Project page showcasing my work, a Resume page with my profile and experience, and a Contact page with a form to reach out to me.",
       "tags": [
         "Next.js",
         "TypeScript",
@@ -57,7 +65,15 @@
         "Docker"
       ],
       "href": "#",
-      "repo": "https://github.com/Stefans217/Portfolio-Website"
+      "repo": "https://github.com/Stefans217/Portfolio-Website",
+      "images": [
+        "/images/Portfolio/Portfolio_Home.png",
+        "/images/Portfolio/Portfolio_About.png",
+        "/images/Portfolio/Portfolio_ProjectsClearjar.png",
+        "/images/Portfolio/Portfolio_ProjectsQuizgen.png",
+        "/images/Portfolio/Portfolio_Resume.png",
+        "/images/Portfolio/Portfolio_Contact.png" 
+      ]
     }
     
   ]
