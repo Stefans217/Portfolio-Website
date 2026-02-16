@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
-import { signSession } from '@/lib/auth';
+import { signSession, verifyPassword } from '@/lib/auth';
 import { cookies } from 'next/headers';
 
 export async function POST(req: Request) {
@@ -11,15 +11,18 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Missing email or password' }, { status: 400 });
     }
 
+    // Look up user by email, not a hardcoded id
     const user = await prisma.user.findUnique({
-      where: { id: '1' },
+      where: { email },
     });
 
-    if (!user || user.email !== email) {
+    if (!user) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
-    if (password !== user.password) {
+    // Use scrypt-based password verification instead of plaintext comparison
+    const passwordValid = await verifyPassword(password, user.password);
+    if (!passwordValid) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 

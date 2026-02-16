@@ -47,17 +47,17 @@
     {
       "id": "p3",
       "title": "Personal Portfolio Website",
-      "description": "Description for project 3.",
+      "description": "The site you're looking at right now! A full-stack portfolio built with Next.js, Prisma, PostgreSQL, and Tailwind CSS, featuring a blog with Markdown support and an admin dashboard.",
       "tags": [
-        "Tag1",
-        "Tag2"
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Prisma",
+        "PostgreSQL",
+        "Docker"
       ],
       "href": "#",
-      "repo": "#",
-      "images": [
-        "/images/project3/image1.png",
-        "/images/project3/image2.png"
-      ]
+      "repo": "https://github.com/Stefans217/Portfolio-Website"
     }
     
   ]

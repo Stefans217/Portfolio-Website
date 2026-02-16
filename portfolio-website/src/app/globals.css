@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Extended transition delays for hero animations */
+.delay-600 { transition-delay: 600ms; }
+.delay-700 { transition-delay: 700ms; }
+
 /* Theme variables (centralized) - keep palette aligned with blog styles */
 :root {
   --background: #0E1618; /* main background */
@@ -32,7 +36,71 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+/* Ensure all interactive elements show a pointer cursor */
+button,
+a,
+[role="button"] {
+  cursor: pointer;
+}
+
+/* ── Site-wide typography tokens ── */
+.page-container {
+  width: 100%;
+  max-width: 64rem; /* 1024px – matches max-w-5xl */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;   /* px-4 */
+  padding-right: 1rem;
+  padding-top: 3rem;    /* py-12 */
+  padding-bottom: 4rem; /* pb-16 */
+}
+@media (min-width: 768px) {
+  .page-container {
+    padding-left: 1.5rem; /* md:px-6 */
+    padding-right: 1.5rem;
+    padding-top: 4rem;    /* md:py-16 */
+  }
+}
+
+.page-title {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 700;
+  color: var(--foreground);
+  letter-spacing: -0.01em;
+}
+@media (min-width: 768px) {
+  .page-title { font-size: 2.25rem; /* md:text-4xl */ }
+}
+
+.section-heading {
+  font-size: 1.5rem;  /* text-2xl */
+  font-weight: 700;
+  color: var(--foreground);
+}
+@media (min-width: 768px) {
+  .section-heading { font-size: 1.875rem; /* md:text-3xl */ }
+}
+
+.section-divider {
+  border-bottom: 1px solid #374151; /* border-gray-700 */
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.body-text {
+  font-size: 1.125rem; /* text-lg */
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.body-text-sm {
+  font-size: 1rem;     /* text-base */
+  color: var(--muted);
+  line-height: 1.7;
 }
 
 /* Utility theme classes for components to reuse variables */
@@ -83,8 +151,18 @@ body {
   transition: width 0.3s ease-in-out;
 }
 
-.nav-link-underline:hover::after {
+/* Active nav link styles */
+.nav-link-active {
+  color: var(--accent);
+}
+
+.nav-link-active::after {
   width: 100%;
+}
+
+.mobile-link-active {
+  color: var(--accent);
+  font-weight: 600;
 }
 
 /* Blog content markdown styling (use variables) */

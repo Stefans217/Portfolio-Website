@@ -2,10 +2,11 @@ import { Suspense } from "react";
 import prisma from "@/lib/prisma";
 import BlogList from "@/components/BlogList";
 import { marked } from "marked";
+import sanitizeHtml from "sanitize-html";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
-export const dynamic = "force-dynamic"; // Skip prerendering, fetch data at request time
-export const revalidate = 60; // Revalidate every 60 seconds
+// Use ISR: revalidate every 60 seconds (do NOT combine with force-dynamic)
+export const revalidate = 60;
 
 // Configure marked once at module level
 marked.setOptions({
@@ -29,11 +30,20 @@ async function BlogPosts() {
         },
     });
 
-    // Convert dates to strings and parse markdown on the server
+    // Convert dates to strings, parse markdown, and sanitize HTML to prevent XSS
     const serializedPosts = posts.map((post) => ({
         ...post,
         content: post.content,
-        htmlContent: marked.parse(post.content) as string,
+        htmlContent: sanitizeHtml(marked.parse(post.content) as string, {
+            allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img", "h1", "h2"]),
+            allowedAttributes: {
+                ...sanitizeHtml.defaults.allowedAttributes,
+                img: ["src", "alt", "title", "width", "height"],
+                a: ["href", "name", "target", "rel"],
+                code: ["class"],
+                span: ["class"],
+            },
+        }),
         createdAt: post.createdAt.toISOString(),
         updatedAt: post.updatedAt.toISOString(),
     }));
@@ -43,14 +53,14 @@ async function BlogPosts() {
 
 export default function BlogPage() {
     return (
-        <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto">
-                <h1 className="text-4xl font-bold text-foreground mb-8 text-center">Blog</h1>
-                <Suspense fallback={<BlogSkeleton />}>
-                    <BlogPosts />
-                </Suspense>
+        <main className="page-container">
+            <div className="section-divider">
+                <h1 className="page-title">Blog</h1>
             </div>
-        </div>
+            <Suspense fallback={<BlogSkeleton />}>
+                <BlogPosts />
+            </Suspense>
+        </main>
     );
 }
 

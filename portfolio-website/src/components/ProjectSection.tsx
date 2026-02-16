@@ -25,13 +25,13 @@ export default function ProjectSection({ project, reversed = false }: Props) {
 
                 {/* Text Content */}
                 <div className={`${reversed ? "md:order-1" : "md:order-2"} order-2 md:col-span-2`}>
-                    <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-4">{title}</h2>
-                    <p className="text-lg text-muted mb-6 leading-relaxed">{description}</p>
+                    <h2 className="section-heading mb-4">{title}</h2>
+                    <p className="body-text mb-6">{description}</p>
 
                     {tags?.length ? (
                         <ul className="flex flex-wrap gap-2 mb-6">
                             {tags.map((tag) => (
-                                <li key={tag} className="text-sm px-2.5 py-1 rounded-md bg-gray-800 text-gray-300 ring-1 ring-gray-600">
+                                <li key={tag} className="text-xs px-2.5 py-1 rounded-md bg-gray-800 text-gray-300 ring-1 ring-gray-600">
                                     {tag}
                                 </li>
                             ))}
@@ -40,7 +40,7 @@ export default function ProjectSection({ project, reversed = false }: Props) {
 
                     {repo && (
                         <div className="flex items-center gap-4">
-                            <Link href={repo} target="_blank" rel="noopener noreferrer" className="text-muted hover:text-accent flex items-center gap-1 transition-colors">
+                            <Link href={repo} target="_blank" rel="noopener noreferrer" className="text-sm text-muted hover:text-accent flex items-center gap-1 transition-colors">
                                 View the Repo →
                             </Link>
                         </div>
