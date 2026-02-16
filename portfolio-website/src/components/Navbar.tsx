@@ -29,7 +29,7 @@ export default function Navbar() {
             <div className="max-w-5xl mx-auto flex items-center justify-between p-4 md:p-6">
                 {/* Logo & Name */}
                 <Link href="/" className="flex items-center gap-3 transition-transform duration-300 hover:scale-105" aria-label="Home">
-                    <Image src={logo} alt="Stefan Spataro logo" width={80} height={80} className="rounded-full object-cover" priority />
+                    <Image src={logo} alt="Stefan Spataro logo" width={30} height={30} className="rounded-full object-cover" priority />
                     <span className="hidden sm:inline-block font-semibold text-lg text-white drop-shadow-sm">Stefan Spataro</span>
                 </Link>
 
