@@ -34,7 +34,7 @@ export default function SkillsGrid({ skills, onExpand, onCollapse }: SkillsGridP
         <div className="w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12">
                 {displayedSkills.map((s) => (
-                    <SkillCard key={s.id} {...s} />
+                    <SkillCard key={s.name} {...s} />
                 ))}
             </div>
 
