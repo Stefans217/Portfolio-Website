@@ -6,10 +6,14 @@ const prisma = new PrismaClient();
 async function main() {
   const email = process.env.ADMIN_EMAIL;
   const password = process.env.ADMIN_PASSWORD;
+  const name = process.env.ADMIN_NAME ?? 'Admin';
 
   if (!email || !password) {
-    console.error('Please set ADMIN_EMAIL and ADMIN_PASSWORD environment variables.');
-    console.error('Usage: ADMIN_EMAIL=you@example.com ADMIN_PASSWORD=yourpass npx tsx prisma/seed.ts');
+    console.error(
+      'Error: ADMIN_EMAIL and ADMIN_PASSWORD environment variables are required.\n' +
+        'Example:\n' +
+        '  ADMIN_EMAIL=admin@example.com ADMIN_PASSWORD=supersecret npx tsx prisma/seed.ts'
+    );
     process.exit(1);
   }
 
@@ -17,20 +21,18 @@ async function main() {
 
   const user = await prisma.user.upsert({
     where: { email },
-    update: { password: hashedPassword },
-    create: {
-      email,
-      password: hashedPassword,
-      name: 'Admin',
-    },
+    update: { password: hashedPassword, name },
+    create: { email, password: hashedPassword, name },
   });
 
-  console.log(`Admin user upserted: ${user.email} (id: ${user.id})`);
+  console.log(`✅ Admin user seeded: ${user.email} (id: ${user.id})`);
 }
 
 main()
   .catch((e) => {
-    console.error(e);
+    console.error('Seed failed:', e);
     process.exit(1);
   })
-  .finally(() => prisma.$disconnect());
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

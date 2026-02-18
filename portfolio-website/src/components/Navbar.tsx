@@ -2,41 +2,50 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import logo from "../assets/images/Logo 7.png";
 import githubIcon from "../assets/images/github-mark-white.png";
 import linkedinIcon from "../assets/images/InBug-White.png";
 
 const NAV_LINKS = [
-    { href: "/", label: "Home & About" },
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
     { href: "/projects", label: "My Projects" },
-    { href: "/blog", label: "Blog" },
+    { href: "/resume", label: "Resume" },
+    // { href: "/blog", label: "Blog" }, // temporarily disabled
     { href: "/contact", label: "Contact Me" },
 ] as const;
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const pathname = usePathname();
+
+    const isActive = (href: string) =>
+        href === "/" ? pathname === "/" : pathname.startsWith(href);
 
     return (
         <header className="w-full theme-navbar backdrop-blur-sm border-b border-gray-700/80">
-            <div className="max-w-6xl mx-auto flex items-center justify-between p-4 md:p-6">
+            <div className="max-w-5xl mx-auto flex items-center justify-between p-4 md:p-6">
                 {/* Logo & Name */}
                 <Link href="/" className="flex items-center gap-3 transition-transform duration-300 hover:scale-105" aria-label="Home">
-                    <Image src={logo} alt="Stefan Spataro logo" width={80} height={80} className="rounded-full object-cover" priority />
+                    <Image src={logo} alt="Stefan Spataro logo" width={30} height={30} className="rounded-full object-cover" priority />
                     <span className="hidden sm:inline-block font-semibold text-lg text-white drop-shadow-sm">Stefan Spataro</span>
                 </Link>
 
-                {/* Desktop Navigation */}
-                <nav className="hidden md:flex items-center gap-6" aria-label="Main navigation">
-                    {NAV_LINKS.map(({ href, label }) => (
-                        <Link key={href} href={href} className="text-sm font-medium header-link nav-link-underline">
-                            {label}
-                        </Link>
-                    ))}
-                </nav>
+                {/* Right side: Pages + Social Icons */}
+                <div className="flex items-center gap-6">
+                    {/* Desktop Navigation */}
+                    <nav className="hidden md:flex items-center gap-6" aria-label="Main navigation">
+                        {NAV_LINKS.map(({ href, label }) => (
+                            <Link key={href} href={href} className={["text-sm font-medium header-link nav-link-underline", isActive(href) ? "nav-link-active" : ""].filter(Boolean).join(" ")}>
+                                {label}
+                            </Link>
+                        ))}
+                    </nav>
 
-                {/* Social Icons & Mobile Menu Button */}
-                <div className="flex items-center gap-4">
+                    {/* Social Icons & Mobile Menu Button */}
+                    <div className="flex items-center gap-4">
                     {/* Social Icons */}
                     <div className="hidden sm:flex items-center gap-3">
                         <a href="https://github.com/Stefans217?tab=repositories" target="_blank" rel="noopener noreferrer" className="inline-flex items-center transition-transform duration-200 hover:scale-110" aria-label="GitHub Profile">
@@ -53,15 +62,16 @@ export default function Navbar() {
                             {isMenuOpen ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /> : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />}
                         </svg>
                     </button>
+                    </div>
                 </div>
             </div>
 
             {/* Mobile Menu Panel */}
             {isMenuOpen && (
                 <div className="md:hidden border-t border-gray-700/80 theme-navbar backdrop-blur-sm">
-                    <nav className="max-w-6xl mx-auto p-4 flex flex-col gap-3" aria-label="Mobile navigation">
+                    <nav className="max-w-5xl mx-auto p-4 flex flex-col gap-3" aria-label="Mobile navigation">
                         {NAV_LINKS.map(({ href, label }) => (
-                            <Link key={href} href={href} className="block py-2 mobile-link transition-colors" onClick={() => setIsMenuOpen(false)}>
+                            <Link key={href} href={href} className={["block py-2 mobile-link transition-colors", isActive(href) ? "mobile-link-active" : ""].filter(Boolean).join(" ")} onClick={() => setIsMenuOpen(false)}>
                                 {label}
                             </Link>
                         ))}

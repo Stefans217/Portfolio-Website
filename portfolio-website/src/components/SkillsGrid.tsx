@@ -20,12 +20,10 @@ export default function SkillsGrid({ skills, onExpand, onCollapse }: SkillsGridP
         setIsExpanded(newExpandedState);
 
         if (newExpandedState && onExpand) {
-            // Small delay to allow the animation to start before scrolling
             setTimeout(() => {
                 onExpand();
             }, 100);
         } else if (!newExpandedState && onCollapse) {
-            // Small delay to allow the animation to start before scrolling
             setTimeout(() => {
                 onCollapse();
             }, 100);
@@ -34,30 +32,19 @@ export default function SkillsGrid({ skills, onExpand, onCollapse }: SkillsGridP
 
     return (
         <div className="w-full">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12">
                 {displayedSkills.map((s) => (
-                    <SkillCard key={s.id} {...s} />
+                    <SkillCard key={s.name} {...s} />
                 ))}
             </div>
 
             {shouldShowButton && (
-                <div className="mt-8 text-center">
-                    <button onClick={handleToggle} className="inline-flex items-center gap-2 px-6 py-3 card-bg border border-gray-700 rounded-lg text-foreground font-medium hover:bg-gray-800 transition-colors">
-                        {isExpanded ? (
-                            <>
-                                Show Less
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                                </svg>
-                            </>
-                        ) : (
-                            <>
-                                Show All {skills.length} Skills
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </>
-                        )}
+                <div className="mt-6 text-center">
+                    <button
+                        onClick={handleToggle}
+                        className="cursor-pointer text-sm text-muted hover:text-foreground tracking-wide uppercase transition-colors duration-200 hover:underline underline-offset-4"
+                    >
+                        {isExpanded ? "Show Less ↑" : `Show All ${skills.length} Skills ↓`}
                     </button>
                 </div>
             )}

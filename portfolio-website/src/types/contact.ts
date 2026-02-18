@@ -34,16 +34,16 @@ export function validateContact(input: Partial<ContactPayload>): {
   const errors: Partial<Record<keyof ContactPayload, string>> = {};
 
   const name = (input.name ?? "").trim();
-  if (!name) errors.name = "";
+  if (!name) errors.name = "Name is required";
 
   const email = (input.email ?? "").trim();
   // simple email check
   const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!email) errors.email = "";
+  if (!email) errors.email = "Email is required";
   else if (!emailRe.test(email)) errors.email = "Enter a valid email";
 
   const message = (input.message ?? "").trim();
-  if (!message) errors.message = "";
+  if (!message) errors.message = "Message is required";
   else if (message.length < 10)
     errors.message = "Message must be at least 10 characters";
   else if (message.length > MESSAGE_MAX_LENGTH)

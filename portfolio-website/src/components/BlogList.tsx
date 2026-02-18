@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect, memo, useCallback } from "react";
-import { BLOG_CATEGORIES, BlogCategory } from "@/types/blog";
+import { BLOG_CATEGORIES, type BlogCategory } from "@/types/blog";
+import { getCategoryColorDark } from "@/utils/categoryColors";
 
 type BlogPost = {
     id: string;
@@ -106,10 +107,10 @@ const BlogPostCard = memo(function BlogPostCard({ post, isExpanded, shouldCollap
     return (
         <article className="card-bg rounded-lg shadow-md overflow-hidden p-6 transition-all duration-300 ease-in-out border border-gray-700">
             <div className="flex items-center justify-between mb-2">
-                <span className={`px-3 py-1 text-xs font-medium rounded-full ${getCategoryColor(post.category)}`}>{BLOG_CATEGORIES[post.category]}</span>
+                <span className={`px-3 py-1 text-xs font-medium rounded-full ${getCategoryColorDark(post.category)}`}>{BLOG_CATEGORIES[post.category]}</span>
                 <p className="text-sm text-muted">{formatDate(post.createdAt)}</p>
             </div>
-            <h2 className="text-2xl font-bold text-foreground mb-4">{post.title}</h2>
+            <h2 className="section-heading mb-4">{post.title}</h2>
 
             <div className="relative">
                 <div
@@ -137,17 +138,6 @@ const BlogPostCard = memo(function BlogPostCard({ post, isExpanded, shouldCollap
         </article>
     );
 });
-
-function getCategoryColor(category: BlogCategory): string {
-    const colors: Record<BlogCategory, string> = {
-        NETWORKING: "bg-purple-900/50 text-purple-300 border border-purple-700",
-        TUTORIALS: "bg-green-900/50 text-green-300 border border-green-700",
-        RANDOM: "bg-yellow-900/50 text-yellow-300 border border-yellow-700",
-        TECH_NEWS: "bg-blue-900/50 text-blue-300 border border-blue-700",
-        PERSONAL: "bg-pink-900/50 text-pink-300 border border-pink-700",
-    };
-    return colors[category] || "bg-gray-800 text-gray-300 border border-gray-700";
-}
 
 function formatDate(dateString: string): string {
     const date = new Date(dateString);

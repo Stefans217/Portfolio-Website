@@ -6,13 +6,13 @@ const allProjects: Project[] = (projectsData.allProjects as unknown as Project[]
 
 export default function ProjectsPage() {
     return (
-        <main className="mx-auto max-w-5xl px-4 md:px-6 pb-16">
+        <main className="page-container">
             {/* Header Section */}
-            <section className="py-12 md:py-20">
-                <div className="border-b border-gray-700 pb-2 mb-6">
-                    <h1 className="text-3xl md:text-4xl font-bold text-foreground">Projects</h1>
+            <section className="mb-12">
+                <div className="section-divider">
+                    <h1 className="page-title">Projects</h1>
                 </div>
-                <p className="text-lg text-muted leading-relaxed">A selection of my work, showcasing various projects and technical solutions.</p>
+                <p className="body-text">A selection of my work, showcasing various projects and technical solutions.</p>
             </section>
 
             {/* Projects List */}

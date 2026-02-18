@@ -1,1 +1,0 @@
-// for adding and editing projects in the admin dashboard.

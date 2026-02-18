@@ -4,6 +4,7 @@ import { validateContact } from "@/types/contact";
 import prisma from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { verifySession } from "@/lib/auth";
+import { Prisma } from "@/generated/prisma";
 
 // Prisma requires the Node.js runtime (not Edge)
 export const runtime = "nodejs";
@@ -57,6 +58,12 @@ export async function DELETE(req: Request) {
 
     return NextResponse.json({ success: true });
   } catch (err) {
+    if (
+      err instanceof Prisma.PrismaClientKnownRequestError &&
+      err.code === "P2025"
+    ) {
+      return NextResponse.json({ error: "Message not found" }, { status: 404 });
+    }
     console.error("[contact] delete error", err);
     return NextResponse.json(
       { error: "Something went wrong." },
