@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import type { ContactPayload, ContactResponse } from "@/types/contact";
 import { validateContact } from "@/types/contact";
 import prisma from "@/lib/prisma";
+import { sendContactNotification } from "@/lib/resend";
 import { cookies } from "next/headers";
 import { verifySession } from "@/lib/auth";
 import { Prisma } from "@/generated/prisma";
@@ -121,6 +122,13 @@ export async function POST(
         message: data.message,
       },
     });
+
+    // Send email notification (fire-and-forget so it doesn't block the response)
+    sendContactNotification({
+      name: data.name,
+      email: data.email,
+      message: data.message,
+    }).catch((err) => console.error("[contact] email notification failed", err));
 
     return NextResponse.json(
       {
