@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
-import { signSession } from '@/lib/auth';
+import { signSession, verifyPassword } from '@/lib/auth';
 import { cookies } from 'next/headers';
 
 export async function POST(req: Request) {
@@ -12,14 +12,15 @@ export async function POST(req: Request) {
     }
 
     const user = await prisma.user.findUnique({
-      where: { id: '1' },
+      where: { email },
     });
 
-    if (!user || user.email !== email) {
+    if (!user) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
-    if (password !== user.password) {
+    const isValidPassword = await verifyPassword(password, user.password);
+    if (!isValidPassword) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
