@@ -25,7 +25,7 @@ export async function sendContactNotification({
   }
 
   const { error } = await resend.emails.send({
-    from: "Portfolio Contact <onboarding@resend.dev>",
+    from: "Portfolio Contact <contact@notify.stefanspataro.com>",
     to,
     subject: `New contact message from ${name}`,
     replyTo: email,
