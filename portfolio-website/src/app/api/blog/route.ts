@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import { cookies } from "next/headers";
 import { verifySession } from "@/lib/auth";
 import { z } from "zod";
-import { Prisma } from "@/generated/prisma";
+import { Prisma } from "@prisma/client";
 
 const BLOG_CATEGORIES = ["NETWORKING", "TUTORIALS", "RANDOM", "TECH_NEWS", "PERSONAL"] as const;
 

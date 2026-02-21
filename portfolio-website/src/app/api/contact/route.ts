@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 import { sendContactNotification } from "@/lib/resend";
 import { cookies } from "next/headers";
 import { verifySession } from "@/lib/auth";
-import { Prisma } from "@/generated/prisma";
+import { Prisma } from "@prisma/client";
 
 // Prisma requires the Node.js runtime (not Edge)
 export const runtime = "nodejs";

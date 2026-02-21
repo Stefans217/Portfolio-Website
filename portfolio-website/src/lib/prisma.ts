@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/generated/prisma";
+import { PrismaClient } from "@prisma/client";
 
 // Ensure a single Prisma client instance across hot-reloads in development.
 // In production (serverless/edge), the module is cached per bundle instance.
