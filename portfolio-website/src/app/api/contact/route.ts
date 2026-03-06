@@ -123,12 +123,18 @@ export async function POST(
       },
     });
 
-    // Send email notification (fire-and-forget so it doesn't block the response)
-    sendContactNotification({
-      name: data.name,
-      email: data.email,
-      message: data.message,
-    }).catch((err) => console.error("[contact] email notification failed", err));
+    // Send email notification — awaited so the serverless runtime doesn't
+    // terminate before Resend completes. A failed email does not fail the
+    // request; the message is already saved.
+    try {
+      await sendContactNotification({
+        name: data.name,
+        email: data.email,
+        message: data.message,
+      });
+    } catch (err) {
+      console.error("[contact] email notification failed", err);
+    }
 
     return NextResponse.json(
       {
