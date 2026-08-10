@@ -2,6 +2,30 @@
   "allProjects": [
     {
       "id": "p1",
+      "title": "Intentfolio - AI-Powered Portfolio Generator",
+      "description": "Intentfolio is a stock portfolio tool that builds personalized portfolios based on user-defined investment goals and risk tolerance, leveraging AI to optimize asset allocation.",
+      "tags": [
+        "Python",
+        "FastAPI",
+        "TypeScript",
+        "Prisma",
+        "PostgreSQL",
+        "LLM APIs",
+        "Railway Deployment Tools"
+      ],
+      "href": "https://intentfolio.net/",
+      "repo": "https://github.com/Stefans217/intent-based-investing",
+      "images": [
+        "/images/Intentfolio/Intentfolio_generate.png",
+        "/images/Intentfolio/Intentfolio_portfolio1.png",
+        "/images/Intentfolio/Intentfolio_portfolio2.png",
+        "/images/Intentfolio/Intentfolio_portfolio3.png",
+        "/images/Intentfolio/Intentfolio_portfolio4.png",
+        "/images/Intentfolio/Intentfolio_portfolio5.png"
+      ]
+    },
+    {
+      "id": "p2",
       "title": "QuizGen - Canvas Quiz Generator",
       "description": "QuizGen uses OpenAI's LLMs to generate plug-and-play QTI 2.2 quizzes for Canvas LMS, boosting productivity for educators.",
       "tags": [
@@ -26,7 +50,7 @@
       ]
     },
     {
-      "id": "p2",
+      "id": "p3",
       "title": "Clearjar",
       "description": "AI financial chatbot that helps users manage expenses and get detailed insights into their spending habits.",
       "tags": [
@@ -53,7 +77,7 @@
       ]
     },
     {
-      "id": "p3",
+      "id": "p4",
       "title": "Portfolio Website",
       "description": "The site you're looking at right now! Featuring Home & About pages, a Project page showcasing my work, a Resume page with my profile and experience, and a Contact page with a form to reach out to me.",
       "tags": [
